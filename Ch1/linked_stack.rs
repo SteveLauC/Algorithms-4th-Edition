@@ -39,6 +39,7 @@ impl<T: Default + Debug> LinkedStack<T> {
         Self { head: None, n: 0 }
     }
     pub fn push(&mut self, item: T) {
+        self.n += 1;
         let mut new_node: Node<T> = Node::new(item);
         if self.head.is_none() {
             self.head = Some(Box::new(new_node));
@@ -51,6 +52,7 @@ impl<T: Default + Debug> LinkedStack<T> {
 
     pub fn pop(&mut self) {
         if let Some(old_node) = self.head.take() {
+            self.n -= 1;
             self.head = old_node.next;
         }
     }
