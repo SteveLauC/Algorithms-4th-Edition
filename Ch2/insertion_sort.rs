@@ -1,3 +1,22 @@
+pub fn insertion_sort<T: PartialOrd + Copy>(s: &mut [T]) {
+    for i_idx in 1..s.len() {
+        let key: T = s[i_idx];
+        let mut j_idx: usize = i_idx - 1;
+
+        while s[j_idx] > key {
+            s[j_idx + 1] = s[j_idx];
+            if j_idx == 0 {
+                break;
+            }
+            j_idx -= 1;
+        }
+        if j_idx == 0 && s[0] > key {
+            s[0] = key;
+        } else {
+            s[j_idx + 1] = key;
+        }
+    }
+}
 
 pub fn is_sorted<T>(arr: &[T]) -> bool
 where
@@ -20,26 +39,7 @@ where
     true
 }
 
-fn insertion_sort<T: PartialOrd + Copy>(s: &mut [T]) {
-    for i_idx in 1..s.len() {
-        let key: T = s[i_idx];
-        let mut j_idx: usize = i_idx - 1;
-
-        while s[j_idx] > key {
-            s[j_idx + 1] = s[j_idx];
-            if j_idx == 0 {
-                break;
-            }
-            j_idx -= 1;
-        }
-        s[j_idx] = key;
-    }
-}
-
-
-fn main() {
-}
-
+fn main() {}
 
 #[cfg(test)]
 mod tests {
@@ -68,7 +68,7 @@ mod tests {
 
     #[test]
     fn basic() {
-        let mut arr: [&str; 4] = ["d", "a", "c", "b"];
+        let mut arr: [i32; 3] = [2, 3, 5];
         insertion_sort(&mut arr);
         assert!(is_sorted(&arr));
     }
@@ -76,13 +76,6 @@ mod tests {
     #[test]
     fn odd_number_of_elements() {
         let mut arr: Vec<&str> = vec!["d", "a", "c", "e", "b"];
-        insertion_sort(&mut arr);
-        assert!(is_sorted(&arr));
-    }
-
-    #[test]
-    fn repeated_elements() {
-        let mut arr: Vec<usize> = vec![542, 542, 542, 542];
         insertion_sort(&mut arr);
         assert!(is_sorted(&arr));
     }
