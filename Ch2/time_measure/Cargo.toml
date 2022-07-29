@@ -1,7 +1,8 @@
 [package]
-name = "t"
+name = "mst"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+clap = "3.2.15"
 rand = "0.8.5"
