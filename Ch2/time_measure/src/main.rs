@@ -20,8 +20,8 @@ fn main() {
 
     let now: Instant = Instant::now();
     match av[2].as_str() {
-        "insertion" => insertion_sort(&mut s),
         "selection" => selection_sort(&mut s),
+        "insertion" => insertion_sort(&mut s),
         _ => todo!("not implemented yet"),
     }
     let elapsed: Duration = now.elapsed();

@@ -1,19 +1,25 @@
-pub fn insertion_sort<T: PartialOrd + Copy>(s: &mut [T]) {
-    for i_idx in 1..s.len() {
-        let key: T = s[i_idx];
-        let mut j_idx: usize = i_idx - 1;
+pub fn insertion_sort<T>(arr: &mut [T])
+where
+    T: PartialOrd + Copy,
+{
+    for i in 1..arr.len() {
+        let cur = arr[i];
+        let mut j = i - 1;
 
-        while s[j_idx] > key {
-            s[j_idx + 1] = s[j_idx];
-            if j_idx == 0 {
+        while arr[j] > cur {
+            arr[j + 1] = arr[j];
+            if j == 0 {
                 break;
             }
-            j_idx -= 1;
+            j -= 1;
         }
-        if j_idx == 0 && s[0] > key {
-            s[0] = key;
+
+        // we exit the loop from that break statement
+        if j == 0 && arr[0] > cur {
+            arr[0] = cur;
         } else {
-            s[j_idx + 1] = key;
+            // `arr[j] > cur` is not satsified, exit from condition judgement
+            arr[j + 1] = cur;
         }
     }
 }
