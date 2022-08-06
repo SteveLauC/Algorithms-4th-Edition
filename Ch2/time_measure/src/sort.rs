@@ -36,3 +36,34 @@ pub fn selection_sort<T: PartialOrd>(s: &mut [T]) {
         s.swap(i_idx, min_idx);
     }
 }
+
+pub fn shell_sort<T: PartialOrd + Copy>(s: &mut [T]) {
+    fn insertion_sort<T: PartialOrd + Copy>(s: &mut [T], start: usize, step: usize) {
+        for i_idx in ((start + step)..s.len()).step_by(step) {
+            let key: T = s[i_idx];
+            let mut j_idx: usize = i_idx - step;
+
+            while j_idx >= start && s[j_idx] > key {
+                s[j_idx + step] = s[j_idx];
+                if start < step && j_idx == start {
+                    break;
+                }
+                j_idx -= step;
+            }
+            if start < step && j_idx == start && s[0] > key {
+                s[start] = key;
+            } else {
+                s[j_idx + step] = key;
+            }
+        }
+    }
+
+    let mut h: usize = s.len() / 2;
+    while h > 0 {
+        for i in 0..h {
+            insertion_sort(s, i, h);
+        }
+
+        h /= 2;
+    }
+}

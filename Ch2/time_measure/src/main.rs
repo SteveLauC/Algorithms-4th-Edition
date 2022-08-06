@@ -4,7 +4,7 @@ mod sort;
 use clap::ArgMatches;
 use cli_arg::cli_init;
 use rand::random;
-use sort::{insertion_sort, selection_sort};
+use sort::{insertion_sort, selection_sort, shell_sort};
 use std::time::{Duration, Instant};
 
 fn main() {
@@ -18,6 +18,7 @@ fn main() {
     match algorithm {
         "selection" => selection_sort(&mut s),
         "insertion" => insertion_sort(&mut s),
+        "shell" => shell_sort(&mut s),
         _ => todo!("not implemented yet"),
     }
     let elapsed: Duration = now.elapsed();
