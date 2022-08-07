@@ -39,4 +39,10 @@ Use <shell sort> to sort 10000 random numbers, consuming 1.246734ms
 
 $ ./mst 10000 shell -o
 Use <shell sort> to sort 10000 ordered numbers, consuming 316.868µs
+
+$ ./mst 10000 merge
+Use <merge sort> to sort 10000 random numbers, consuming 1.737893ms
+
+$ ./mst 10000 merge -o
+Use <merge sort> to sort 10000 ordered numbers, consuming 488.822µs
 ```

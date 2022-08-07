@@ -67,3 +67,41 @@ pub fn shell_sort<T: PartialOrd + Copy>(s: &mut [T]) {
         h /= 2;
     }
 }
+
+fn merge<T: Copy + Ord>(a: &mut [T], mid: usize) {
+    let aux: Vec<T> = a.to_vec();
+    let len: usize = a.len();
+    let mut i: usize = 0;
+    let mut j: usize = mid;
+    let mut p: usize = 0;
+
+    while i < mid && j < len {
+        if aux[i] < aux[j] {
+            a[p] = aux[i];
+            i += 1;
+        } else {
+            a[p] = aux[j];
+            j += 1;
+        }
+        p += 1;
+    }
+
+    if i < mid {
+        a[p..len].clone_from_slice(&aux[i..mid]);
+    }
+    if j < len {
+        a[p..len].clone_from_slice(&aux[j..len]);
+    }
+}
+
+pub fn merge_sort<T: Copy + Ord>(a: &mut [T]) {
+    if a.len() <= 1 {
+        return;
+    }
+
+    let mid: usize = a.len() / 2;
+
+    merge_sort(&mut a[..mid]);
+    merge_sort(&mut a[mid..]);
+    merge(a, mid);
+}

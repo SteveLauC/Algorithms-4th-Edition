@@ -4,21 +4,22 @@ mod sort;
 use clap::ArgMatches;
 use cli_arg::cli_init;
 use rand::random;
-use sort::{insertion_sort, selection_sort, shell_sort};
+use sort::{insertion_sort, selection_sort, shell_sort, merge_sort};
 use std::time::{Duration, Instant};
 
 fn main() {
     let app: ArgMatches = cli_init();
     let len: usize = app.value_of("n").unwrap().parse().unwrap();
     let use_ordered_data: bool = app.is_present("ordered-data");
-    let mut s: Vec<usize> = random_array(len, use_ordered_data);
+    let mut a: Vec<usize> = generate_array(len, use_ordered_data);
     let algorithm: &str = app.value_of("algorithm").unwrap();
 
     let now: Instant = Instant::now();
     match algorithm {
-        "selection" => selection_sort(&mut s),
-        "insertion" => insertion_sort(&mut s),
-        "shell" => shell_sort(&mut s),
+        "selection" => selection_sort(&mut a),
+        "insertion" => insertion_sort(&mut a),
+        "shell" => shell_sort(&mut a),
+        "merge" => merge_sort(&mut a),
         _ => todo!("not implemented yet"),
     }
     let elapsed: Duration = now.elapsed();
@@ -36,7 +37,7 @@ fn main() {
     );
 }
 
-fn random_array(len: usize, use_ordered_data: bool) -> Vec<usize> {
+fn generate_array(len: usize, use_ordered_data: bool) -> Vec<usize> {
     match use_ordered_data {
         true => (0..len).collect(),
         false => (0..len).map(|_| random()).collect(),
