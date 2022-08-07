@@ -19,8 +19,8 @@ OPTIONS:
     -o            use ordered input data instead of the random one
 ```
 
-For example, to sort 1000 random items using insertion sort, we can:
 
+Sorting algorithm performance overview:
 ```shell
 $ ./mst 10000 selection
 Use <selection sort> to sort 10000 random numbers, consuming 52.548673ms
