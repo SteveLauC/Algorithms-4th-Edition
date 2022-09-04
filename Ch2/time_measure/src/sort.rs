@@ -94,14 +94,42 @@ fn merge<T: Copy + Ord>(a: &mut [T], mid: usize) {
     }
 }
 
-pub fn merge_sort<T: Copy + Ord>(a: &mut [T]) {
+pub fn top_down_merge_sort<T: Copy + Ord>(a: &mut [T]) {
     if a.len() <= 1 {
         return;
     }
 
     let mid: usize = a.len() / 2;
 
-    merge_sort(&mut a[..mid]);
-    merge_sort(&mut a[mid..]);
+    top_down_merge_sort(&mut a[..mid]);
+    top_down_merge_sort(&mut a[mid..]);
     merge(a, mid);
+}
+
+pub fn bottom_up_merge_sort<T: Copy + Ord>(a: &mut [T]) {
+    if a.len() <= 1 {
+        return;
+    }
+
+    let len: usize = a.len();
+    let mut sub_array_size: usize = 1;
+    while sub_array_size < len {
+        let mut start_index: usize = 0;
+        // still have more than one sub-arrays to sort
+        while len - start_index > sub_array_size {
+            let end_idx: usize = if start_index + 2 * sub_array_size > len {
+                len
+            } else {
+                start_index + 2 * sub_array_size
+            };
+            // merge a[start_index..start_index+sub_array_size] and 
+            // a[start_index+sub_array_size, end_idx]
+            //
+            // NOTE: mid is a relative start_index number starting from `start_index`
+            merge(&mut a[start_index..end_idx], sub_array_size);
+            // update `start_index` to merge the next sub-arrays
+            start_index = end_idx;
+        }
+        sub_array_size *= 2;
+    }
 }

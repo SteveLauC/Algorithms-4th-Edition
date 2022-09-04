@@ -40,9 +40,15 @@ Use <shell sort> to sort 10000 random numbers, consuming 1.246734ms
 $ ./mst 10000 shell -o
 Use <shell sort> to sort 10000 ordered numbers, consuming 316.868µs
 
-$ ./mst 10000 merge
-Use <merge sort> to sort 10000 random numbers, consuming 1.737893ms
+$ ./mst 10000 top_down_merge
+Use <top_down_merge sort> to sort 10000 random numbers, consuming 13.237374ms
 
-$ ./mst 10000 merge -o
-Use <merge sort> to sort 10000 ordered numbers, consuming 488.822µs
+$ ./mst 10000 top_down_merge -o
+Use <top_down_merge sort> to sort 10000 ordered numbers, consuming 8.824532ms
+
+$ ./mst 10000 bottom_up_merge
+Use <bottom_up_merge sort> to sort 10000 random numbers, consuming 12.869071ms
+
+$ ./mst 10000 bottom_up_merge -o
+Use <bottom_up_merge sort> to sort 10000 ordered numbers, consuming 8.623859ms
 ```

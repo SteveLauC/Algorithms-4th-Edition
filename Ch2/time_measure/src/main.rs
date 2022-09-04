@@ -4,7 +4,7 @@ mod sort;
 use clap::ArgMatches;
 use cli_arg::cli_init;
 use rand::random;
-use sort::{insertion_sort, selection_sort, shell_sort, merge_sort};
+use sort::{bottom_up_merge_sort, insertion_sort, selection_sort, shell_sort, top_down_merge_sort};
 use std::time::{Duration, Instant};
 
 fn main() {
@@ -19,7 +19,8 @@ fn main() {
         "selection" => selection_sort(&mut a),
         "insertion" => insertion_sort(&mut a),
         "shell" => shell_sort(&mut a),
-        "merge" => merge_sort(&mut a),
+        "top_down_merge" => top_down_merge_sort(&mut a),
+        "bottom_up_merge" => bottom_up_merge_sort(&mut a),
         _ => todo!("not implemented yet"),
     }
     let elapsed: Duration = now.elapsed();
