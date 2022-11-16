@@ -52,8 +52,8 @@ fn bottom_up_merge_sort<T: Copy + Ord>(a: &mut [T]) {
             } else {
                 start_index + 2 * sub_array_size
             };
-            // merge a[start_index..start_index+sub_array_size] and a[start_index+sub_array_size, end_idx]
-            // NOTE: mid is a relative start_index number starting from `start_index`
+            // merge a[start_index..start_index+sub_array_size] and a[start_index+sub_array_size..end_idx]
+            // NOTE: mid is a relative index number starting from `start_index`
             merge(&mut a[start_index..end_idx], sub_array_size);
             // update `start_index` to merge the next sub-arrays
             start_index = end_idx;
